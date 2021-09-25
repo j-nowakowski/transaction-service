@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  db:
+    build:
+      context: ./stori-mysql
+    container_name: stori_mysql
+    ports:
+      - "53060:3306"
+    
+  app:
+    build:
+      context: ./stori-go
+    environment:
+      # For the sake of this example project, credentials are stored here.
+      # In real application, credentials would not be committed to the repository,
+      # and root would not be the user used.
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_HOST: stori_mysql
+    container_name: stori_go
+    ports:
+      - "50800:8080"
+    tty: true
+    depends_on:
+      - db
+    volumes:
+      - ~/workspace/stori/stori-go/output:/tmp/output
+
+volumes:
+  emails:
