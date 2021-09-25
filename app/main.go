@@ -1,11 +1,11 @@
 package main
 
 import (
+	"app/transactions"
 	"bufio"
 	"database/sql"
 	"fmt"
 	"os"
-	"stori-go/transactions"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -84,12 +84,12 @@ func initializeDbConn() (*sql.DB, error) {
 // will be destroyed every time the container resets, hence the need for the schema to be initialized here.
 // If this function existed in a real application, it would need to be written idempotently.
 func initializeDbSchema(db *sql.DB) error {
-	_, err := db.Exec("CREATE DATABASE stori;")
+	_, err := db.Exec("CREATE DATABASE myDB;")
 	if err != nil {
 		return fmt.Errorf("while creating database: %v", err)
 	}
 
-	_, err = db.Exec("USE stori;")
+	_, err = db.Exec("USE myDB;")
 	if err != nil {
 		return fmt.Errorf("while using database: %v", err)
 	}

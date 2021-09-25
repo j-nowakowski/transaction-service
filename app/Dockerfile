@@ -9,4 +9,4 @@ RUN true \
     && go build . \
     && go test -v ./...
     
-CMD ["stori-go"]
+CMD ["app"]
