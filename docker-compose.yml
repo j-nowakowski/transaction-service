@@ -25,7 +25,7 @@ services:
     depends_on:
       - db
     volumes:
-      - output:/tmp/output
+      - ./app/output:/tmp/output
 
 volumes:
   output:
